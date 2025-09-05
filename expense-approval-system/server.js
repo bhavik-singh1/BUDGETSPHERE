@@ -34,29 +34,16 @@ app.use("/user", loginRoutes);
 app.use('/user', userProfileRoutes); // Add the user profile routes
 app.use('/admin', expenseCategoryRoutes); // This ensures all expense category routes are under the '/admin' path
 
-app.use((_req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    next();
-  });
-  const corsOptions = {
-    origin: 'http://localhost:3000',  // Allow requests only from this origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    preflightContinue: false,  // Pass the preflight response to the next handler
-    optionsSuccessStatus: 204,  // Send a 204 status for successful OPTIONS requests
-};
+// const cors = require("cors");
 
-// Enable CORS for all routes
-app.use(cors(corsOptions));
-
-// Alternatively, handle OPTIONS request manually (if needed):
-app.options('*', cors(corsOptions));  // Enable CORS preflight for all routes
-
-
-  app.use(cors());
+// Allow frontend (port 3000) to access backend (port 4000)
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+ 
+app.use(cors());
 
 
 const db = mysql.createConnection({

@@ -4,6 +4,17 @@ const db = require("../services/database"); // Ensure the correct path to your d
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
+const cors = require("cors");
+
+// Enable CORS for all routes in this router
+
+router.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+router.use(cors());
 
 const jwtSecret = "supersecretkey123456790!@#";
 

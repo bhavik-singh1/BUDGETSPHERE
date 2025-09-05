@@ -33,7 +33,7 @@ export const loginUser = async (formData) => {
   try {
     console.log("Logging in user with data:", formData); // Debug log
 
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
